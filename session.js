@@ -18,6 +18,7 @@ app.use(session({
 }))
 
 function isAuthenticated(req,res,next){
+    //Check a property that you set on session, because session by itself will always be defined
     if(req.session.user)
         next()
     else

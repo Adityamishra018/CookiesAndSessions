@@ -60,18 +60,11 @@ app.get("/homepage",isAuthenticated,(req,res)=>{
 
 
 app.get("/logout",(req,res)=>{
-    req.session.user = null
-    //save changes on store before you leave the page
-    req.session.save((err)=>{
+    //removes session from store then calls the callback
+    req.session.destroy((err)=>{
         if(err)
             next(err)
-        
-        //send empty new session 
-        req.session.regenerate((err)=>{
-            if(err)
-                next(err)
-            res.redirect("/")
-        })
+        res.redirect("/")
     })
 })
 
